@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: micro-web
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+  template:
+    metadata:
+      labels:
+        name: micro-web
+    spec:
+      containers:
+        - name: web
+          args:
+            - api
+          env:
+            - name: MICRO_API_HANDLER
+              value: web
+            - name: MICRO_API_ADDRESS
+              value: ':8081'
+            - name: MICRO_API_NAMESPACE
+              value: 'micro'
+            - name: MICRO_ENABLE_STATS
+              value: 'true'
+            - name: STATS_AUTH_USER
+              value: 'user'
+            - name: STATS_AUTH_PASS
+              value: 'secret'
+            - name: STATS_AUTH_REALM
+              value: Basic realm="Web Stats"
+            # - name: INDEX_SERVICE
+            #   value: "dashboard"
+            - name: INDEX_STATUS
+              value: '200'
+            - name: INDEX_HEADER
+              value: 'Content-Type:text/plain'
+            - name: INDEX_BODY
+              value: 'hello world'
+          image: saaskit/micro:kubernetes
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+              name: micro-web-port

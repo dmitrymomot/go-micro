@@ -1,2 +1,2 @@
 # go-micro
-Set of basic microservices [go-micro + vuejs + kubernetes]
+Set of basic microservices, uses go-micro + vuejs + kubernetes

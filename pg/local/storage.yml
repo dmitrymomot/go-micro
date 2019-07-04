@@ -19,7 +19,7 @@ apiVersion: v1
 metadata:
   name: postgres-pv-claim
   labels:
-    app: postgres
+    name: postgres
 spec:
   storageClassName: manual
   accessModes:

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: micro-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+  template:
+    metadata:
+      labels:
+        name: micro-api
+    spec:
+      containers:
+        - name: api
+          env:
+            - name: MICRO_API_ADDRESS
+              value: ':8080'
+            - name: MICRO_API_HANDLER
+              value: 'api'
+            - name: MICRO_API_NAMESPACE
+              value: 'saas'
+            - name: MICRO_ENABLE_STATS
+              value: 'true'
+            - name: STATS_AUTH_USER
+              value: 'user'
+            - name: STATS_AUTH_PASS
+              value: 'secret'
+            - name: STATS_AUTH_REALM
+              value: Basic realm="API Stats"
+            - name: CORS_ALLOWED_HEADERS
+              value: '*'
+            - name: CORS_ALLOWED_ORIGINS
+              value: '*'
+            - name: CORS_ALLOWED_METHODS
+              value: 'GET,POST,PUT,DELETE,OPTIONS'
+            - name: INDEX_STATUS
+              value: '200'
+            - name: INDEX_HEADER
+              value: 'Content-Type:text/plain'
+            - name: INDEX_BODY
+              value: '.'
+          args:
+            - api
+          image: saaskit/micro:kubernetes
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: micro-api-port

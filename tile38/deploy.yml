@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tile38
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: tile38
+    spec:
+      containers:
+        - name: tile38
+          image: tile38/tile38:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9851
+              name: tile38-wport
+          volumeMounts:
+            - mountPath: /data
+              name: tile38data
+      volumes:
+        - name: tile38data
+          persistentVolumeClaim:
+            claimName: tile38-pv-claim

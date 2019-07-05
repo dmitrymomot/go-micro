@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nats-pub
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: nats-pub
+    spec:
+      containers:
+        - name: nats-pub
+          image: nats-pub
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: nats-pubp

@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nats-sub
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: nats-sub
+    spec:
+      containers:
+        - name: nats-sub
+          image: nats-sub
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: nats-subp

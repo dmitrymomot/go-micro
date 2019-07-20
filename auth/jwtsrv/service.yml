@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jwtsrv
+  labels:
+    name: jwtsrv
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8801
+      protocol: TCP
+      targetPort: 'jwtsrv-port'
+  selector:
+    name: jwtsrv

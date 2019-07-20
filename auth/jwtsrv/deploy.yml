@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jwtsrv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: jwtsrv
+  template:
+    metadata:
+      labels:
+        name: jwtsrv
+    spec:
+      containers:
+        - name: jwtsrv
+          command:
+            ['/jwtsrv', '--selector=static', '--server_address=0.0.0.0:8801']
+          image: jwtsrv:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8801
+              name: jwtsrv-port

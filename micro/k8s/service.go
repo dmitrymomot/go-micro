@@ -3,6 +3,7 @@ package k8s
 
 import (
 	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/service/grpc"
 	"github.com/micro/go-plugins/registry/kubernetes"
 
 	// static selector offloads load balancing to k8s services
@@ -26,5 +27,5 @@ func NewService(opts ...micro.Option) micro.Service {
 	options = append(options, opts...)
 
 	// return a micro.Service
-	return micro.NewService(options...)
+	return grpc.NewService(options...)
 }

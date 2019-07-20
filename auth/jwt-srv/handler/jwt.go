@@ -7,7 +7,7 @@ import (
 
 	"github.com/micro/go-micro/util/log"
 
-	jwt "jwt-srv/proto/jwt"
+	jwt "github.com/dmitrymomot/go-micro/auth/jwt-srv/proto/jwt"
 )
 
 // Jwt struct

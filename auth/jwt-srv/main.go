@@ -1,13 +1,13 @@
 package main
 
 import (
-	"jwt-srv/handler"
+	"github.com/dmitrymomot/go-micro/auth/jwt-srv/handler"
 
 	"github.com/dmitrymomot/go-micro/micro/k8s"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/util/log"
 
-	jwt "jwt-srv/proto/jwt"
+	jwt "github.com/dmitrymomot/go-micro/auth/jwt-srv/proto/jwt"
 )
 
 func main() {

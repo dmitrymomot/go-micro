@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: jwtapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: jwtapi
+  template:
+    metadata:
+      labels:
+        name: jwtapi
+    spec:
+      containers:
+        - name: jwtapi
+          command:
+            ['/jwtapi', '--selector=static', '--server_address=0.0.0.0:8802']
+          image: jwtapi:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8802
+              name: jwtapi-port

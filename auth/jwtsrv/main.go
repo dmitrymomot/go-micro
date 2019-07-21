@@ -13,7 +13,7 @@ import (
 func main() {
 	// New Service
 	service := k8s.NewService(
-		micro.Name("go.micro.srv.jwt"),
+		micro.Name("jwtsrv"),
 		micro.Version("latest"),
 	)
 
